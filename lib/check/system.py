@@ -9,10 +9,11 @@ async def check_system(
     check_config: dict
 ) -> dict:
     site_name = check_config.get('site', 'default')
+    ssl = check_config.get('ssl', True)
     url = f'/api/s/{site_name}/stat/sysinfo'
     session = await get_session(asset, asset_config, check_config)
     async with aiohttp.ClientSession(**session) as session:
-        async with session.get(url, ssl=False) as resp:
+        async with session.get(url, ssl=ssl) as resp:
             resp.raise_for_status()
             data = await resp.json()
 

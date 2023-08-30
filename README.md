@@ -36,6 +36,11 @@ Create a yaml file, for example _(test.yaml)_:
 asset:
   name: "foo.local"
   check: "unificontroller"
+  config:
+    address: "192.168.1.2"
+    port: 8443
+    ssl: false
+    site: "default"
 ```
 
 Run the probe with the `DRY_RUN` environment variable set the the yaml file above.
