@@ -60,7 +60,9 @@ async def check_system(
         'debug_device': d.get('debug_device'),
         'debug_sdn': d.get('debug_sdn'),
         'unsupported_device_count': d.get('unsupported_device_count'),
-        'unsupported_device_list': d.get('unsupported_device_list'),
+        # unsupported_device_list is a list but the list item type is not
+        # documented; therefore we only keep unsupported_device_count
+        # 'unsupported_device_list': d.get('unsupported_device_list'),
         'unifi_go_enabled': d.get('unifi_go_enabled'),
     } for d in data['data']]
 
