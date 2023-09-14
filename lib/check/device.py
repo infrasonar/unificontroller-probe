@@ -11,6 +11,7 @@ DEVICE_STATE = {
     5: 'provisioning',
     6: 'unreachable',
     7: 'adopting',
+    8: 'deleting',
     9: 'adoption error',
     10: 'adoption failed',
     11: 'isolated',
