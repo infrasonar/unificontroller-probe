@@ -3,6 +3,20 @@ from libprobe.asset import Asset
 from lib.unificonn import get_session
 
 
+DEVICE_STATE = {
+    0: 'offline',
+    1: 'connected',
+    2: 'pending adoption',
+    4: 'updating',
+    5: 'provisioning',
+    6: 'unreachable',
+    7: 'adopting',
+    9: 'adoption error',
+    10: 'adoption failed',
+    11: 'isolated',
+}
+
+
 async def check_device(
     asset: Asset,
     asset_config: dict,
@@ -20,7 +34,7 @@ async def check_device(
     device = [{
         'name': d['name'],
         'mac': d.get('mac'),
-        'state': d.get('state'),
+        'state': DEVICE_STATE.get(d.get('state')),
         'adopted': d.get('adopted'),
         'disabled': d.get('disabled'),
         'type': d.get('type'),
