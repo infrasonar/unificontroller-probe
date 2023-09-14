@@ -40,7 +40,6 @@ async def check_device(
         'type': d.get('type'),
         'model': d.get('model'),
         'in_gateway_mode': d.get('in_gateway_mode'),
-        'name': d.get('name'),
     } for d in data['data']]
 
     return {
