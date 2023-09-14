@@ -38,7 +38,7 @@ asset:
   check: "unificontroller"
   config:
     address: "192.168.1.2"
-    port: 8443
+    port: 443
     ssl: false
     site: "default"
 ```
