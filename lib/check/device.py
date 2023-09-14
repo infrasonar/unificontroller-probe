@@ -32,8 +32,8 @@ async def check_device(
             data = await resp.json()
 
     device = [{
-        'name': d['name'],
-        'mac': d.get('mac'),
+        'name': d['mac'],
+        'device_name': d.get('name'),
         'state': DEVICE_STATE.get(d.get('state')),
         'adopted': d.get('adopted'),
         'disabled': d.get('disabled'),
