@@ -25,8 +25,8 @@ async def check_device(
     check_config: dict
 ) -> dict:
     site_name = check_config.get('site', 'default')
-    ssl = check_config.get('ssl', True)
-    url = f'/api/s/{quote(site_name)}/stat/device-basic'
+    ssl = check_config.get('ssl', False)
+    url = f'/api/s/{quote(site_name, safe="")}/stat/device-basic'
     session = await get_session(asset, asset_config, check_config)
     async with aiohttp.ClientSession(**session) as session:
         async with session.get(url, ssl=ssl) as resp:
