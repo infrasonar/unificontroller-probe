@@ -39,6 +39,8 @@ async def get_session(asset: Asset, asset_config: dict,
     ssl = check_config.get('ssl', False)
     username = asset_config.get('username')
     password = asset_config.get('password')
+    if None in (username, password):
+        raise CheckException('missing credentials')
 
     # we use everything what identifies a connection for an asset as key
     # of the cached 'connection'
