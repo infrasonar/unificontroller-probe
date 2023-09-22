@@ -43,7 +43,7 @@ async def get_session(asset: Asset, asset_config: dict,
     # we use everything what identifies a connection for an asset as key
     # of the cached 'connection'
     connection_args = (address, port, ssl, username, password)
-    session, _ = AssetCache.get_value(connection_args)
+    session = AssetCache.get_value(connection_args)
     if session:
         return session
 
