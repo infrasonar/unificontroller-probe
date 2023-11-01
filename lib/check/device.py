@@ -26,8 +26,9 @@ async def check_device(
 ) -> dict:
     site_name = check_config.get('site', 'default')
     ssl = check_config.get('ssl', False)
-    url = f'/api/s/{quote(site_name, safe="")}/stat/device-basic'
-    session = await get_session(asset, asset_config, check_config)
+    session, is_unifi_os = await get_session(asset, asset_config, check_config)
+    uri = '/proxy/network/api/s/' if is_unifi_os else '/api/s/'
+    url = f'{uri}{quote(site_name, safe="")}/stat/device-basic'
     async with aiohttp.ClientSession(**session) as session:
         async with session.get(url, ssl=ssl) as resp:
             resp.raise_for_status()
