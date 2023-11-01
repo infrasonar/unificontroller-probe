@@ -17,7 +17,7 @@ async def login(asset: Asset, address: str, port: int, ssl: bool,
     try:
         async with aiohttp.ClientSession() as session:
             async with session.post(
-                f'https://{address}:{port}/api/login',
+                f'https://{address}:{port}/api/auth/login',
                 json=auth_data,
                 ssl=ssl,
             ) as resp:
