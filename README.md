@@ -26,8 +26,8 @@ docker build -t unificontroller-probe . --no-cache
 ## Dry run
 
 Available checks:
-- `alarms`
 - `device`
+- `event`
 - `health`
 - `system`
 
