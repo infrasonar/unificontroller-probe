@@ -33,7 +33,7 @@ async def check_event(
         'msg': d.get('msg'),
         'subsystem': d.get('subsystem'),
         'time': int(d.get('time') / 1000) if d.get('time') else None,
-    } for d in data[' data'] if d['key'] not in IGNORE_KEYS]
+    } for d in data['data'] if d['key'] not in IGNORE_KEYS]
     return {
         'event': event
     }
