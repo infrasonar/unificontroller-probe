@@ -27,6 +27,7 @@ docker build -t unificontroller-probe . --no-cache
 
 Available checks:
 - `device`
+- `event`
 - `health`
 - `system`
 
