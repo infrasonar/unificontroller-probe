@@ -36,7 +36,7 @@ async def check_device(
 
     device = [{
         'name': d['mac'],  # str
-        'device_name': d.get('name'),  # str
+        'device_name': d.get('name', d['mac']),  # str, mac fallback
         'state': DEVICE_STATE.get(d.get('state')),  # str
         'adopted': d.get('adopted'),  # bool
         'disabled': d.get('disabled'),  # bool
