@@ -14,5 +14,5 @@ if __name__ == '__main__':
         'system': check_system,
     }
 
-    probe = Probe('unificontroller', version, checks)
+    probe = Probe('unifisite', version, checks)
     probe.start()
