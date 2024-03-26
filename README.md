@@ -1,7 +1,7 @@
-[![CI](https://github.com/infrasonar/unifisite-probe/workflows/CI/badge.svg)](https://github.com/infrasonar/unifisite-probe/actions)
-[![Release Version](https://img.shields.io/github/release/infrasonar/unifisite-probe)](https://github.com/infrasonar/unifisite-probe/releases)
+[![CI](https://github.com/infrasonar/unificontroller-probe/workflows/CI/badge.svg)](https://github.com/infrasonar/unificontroller-probe/actions)
+[![Release Version](https://img.shields.io/github/release/infrasonar/unificontroller-probe)](https://github.com/infrasonar/unificontroller-probe/releases)
 
-# InfraSonar UniFi Site Probe
+# InfraSonar UniFi Controller Probe
 
 ## Environment variable
 
@@ -20,7 +20,7 @@ Variable            | Default                        | Description
 ## Docker build
 
 ```
-docker build -t unifisite-probe . --no-cache
+docker build -t unificontroller-probe . --no-cache
 ```
 
 ## Dry run
@@ -36,7 +36,7 @@ Create a yaml file, for example _(test.yaml)_:
 ```yaml
 asset:
   name: "foo.local"
-  check: "unifisite"
+  check: "unificontroller"
   config:
     address: "192.168.1.2"
     port: 443
