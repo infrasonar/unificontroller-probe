@@ -9,7 +9,7 @@ async def check_system(
     asset_config: dict,
     check_config: dict
 ) -> dict:
-    site_name = check_config.get('site', 'default')
+    site_name = 'default'
     ssl = check_config.get('ssl', False)
     session, is_unifi_os = await get_session(asset, asset_config, check_config)
     uri = '/proxy/network/api/s/' if is_unifi_os else '/api/s/'
