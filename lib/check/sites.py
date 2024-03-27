@@ -35,5 +35,3 @@ async def check_sites(
     return {
         'sites': sites
     }
-
-
