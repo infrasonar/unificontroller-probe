@@ -17,20 +17,20 @@ async def check_sites(
 ) -> dict:
     ssl = check_config.get('ssl', False)
     session, is_unifi_os = await get_session(asset, asset_config, check_config)
-    url = '/proxy/network/api/stat/sites' if is_unifi_os else '/api/stat/sites'
+    url = '/proxy/network/api/self/sites' if is_unifi_os else '/api/self/sites'
     async with aiohttp.ClientSession(**session) as session:
         async with session.get(url, ssl=ssl) as resp:
             resp.raise_for_status()
             data = await resp.json()
 
     sites = [{
-        'name': d['name'],  # str
-        'desc': d.get('desc', d['name']),  # str
-        'device_count': d['device_count'],  # int
-        'location_accuracy': float_or_none(d.get('location_accuracy')),
-        'location_lat': float_or_none(d.get('location_lat')),
-        'location_lng': float_or_none(d.get('location_lng')),
-    } for d in data['data']]
+        'name': site['name'],  # str
+        'desc': site.get('desc', site['name']),  # str
+        'device_count': site['device_count'],  # int
+        'location_accuracy': float_or_none(site.get('location_accuracy')),
+        'location_lat': float_or_none(site.get('location_lat')),
+        'location_lng': float_or_none(site.get('location_lng')),
+    } for site in data['data']]
 
     return {
         'sites': sites
