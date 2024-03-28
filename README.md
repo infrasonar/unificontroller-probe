@@ -26,9 +26,7 @@ docker build -t unificontroller-probe . --no-cache
 ## Dry run
 
 Available checks:
-- `device`
-- `event`
-- `health`
+- `sites`
 - `system`
 
 Create a yaml file, for example _(test.yaml)_:
