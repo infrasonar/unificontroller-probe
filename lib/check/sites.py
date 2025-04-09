@@ -2,6 +2,7 @@ import aiohttp
 from libprobe.asset import Asset
 from lib.unificonn import get_session
 from typing import Any
+from ..connector import get_connector
 
 
 def float_or_none(inp: Any):
@@ -18,7 +19,9 @@ async def check_sites(
     ssl = check_config.get('ssl', False)
     session, is_unifi_os = await get_session(asset, asset_config, check_config)
     url = '/proxy/network/api/self/sites' if is_unifi_os else '/api/self/sites'
-    async with aiohttp.ClientSession(**session) as session:
+    async with aiohttp.ClientSession(
+            connector=get_connector(),
+            **session) as session:
         async with session.get(url, ssl=ssl) as resp:
             resp.raise_for_status()
             data = await resp.json()
