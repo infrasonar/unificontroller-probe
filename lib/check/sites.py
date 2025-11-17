@@ -1,5 +1,6 @@
 import aiohttp
 from libprobe.asset import Asset
+from libprobe.check import Check
 from lib.unificonn import get_session
 from typing import Any
 from ..connector import get_connector
@@ -11,30 +12,32 @@ def float_or_none(inp: Any):
     return None
 
 
-async def check_sites(
-    asset: Asset,
-    asset_config: dict,
-    check_config: dict
-) -> dict:
-    ssl = check_config.get('ssl', False)
-    session, is_unifi_os = await get_session(asset, asset_config, check_config)
-    url = '/proxy/network/api/self/sites' if is_unifi_os else '/api/self/sites'
-    async with aiohttp.ClientSession(
-            connector=get_connector(),
-            **session) as session:
-        async with session.get(url, ssl=ssl) as resp:
-            resp.raise_for_status()
-            data = await resp.json()
+class CheckSites(Check):
+    key = 'sites'
 
-    sites = [{
-        'name': site['name'],  # str
-        'desc': site.get('desc', site['name']),  # str
-        'device_count': site['device_count'],  # int
-        'location_accuracy': float_or_none(site.get('location_accuracy')),
-        'location_lat': float_or_none(site.get('location_lat')),
-        'location_lng': float_or_none(site.get('location_lng')),
-    } for site in data['data']]
+    @staticmethod
+    async def run(asset: Asset, local_config: dict, config: dict) -> dict:
 
-    return {
-        'sites': sites
-    }
+        ssl = config.get('ssl', False)
+        session, is_unifi_os = await get_session(asset, local_config, config)
+        url = '/proxy/network/api/self/sites' if is_unifi_os else \
+            '/api/self/sites'
+        async with aiohttp.ClientSession(
+                connector=get_connector(),
+                **session) as session:
+            async with session.get(url, ssl=ssl) as resp:
+                resp.raise_for_status()
+                data = await resp.json()
+
+        sites = [{
+            'name': site['name'],  # str
+            'desc': site.get('desc', site['name']),  # str
+            'device_count': site['device_count'],  # int
+            'location_accuracy': float_or_none(site.get('location_accuracy')),
+            'location_lat': float_or_none(site.get('location_lat')),
+            'location_lng': float_or_none(site.get('location_lng')),
+        } for site in data['data']]
+
+        return {
+            'sites': sites
+        }
