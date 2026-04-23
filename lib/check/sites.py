@@ -14,6 +14,7 @@ def float_or_none(inp: Any):
 
 class CheckSites(Check):
     key = 'sites'
+    unchanged_eol = 14400
 
     @staticmethod
     async def run(asset: Asset, local_config: dict, config: dict) -> dict:
