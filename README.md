@@ -34,7 +34,7 @@ Create a yaml file, for example _(test.yaml)_:
 ```yaml
 asset:
   name: "foo.local"
-  check: "unificontroller"
+  check: "sites"
   config:
     address: "192.168.1.2"
     port: 443
