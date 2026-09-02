@@ -113,27 +113,6 @@ async def login(address: str,
         f"https://{address}:{port}")
 
 
-async def detect_if_unify_os(asset: Asset, address: str, port: int,
-                             ssl: bool) -> bool:
-    try:
-        async with aiohttp.ClientSession(connector=get_connector()) as session:
-            async with session.head(
-                    f'https://{address}:{port}',
-                    ssl=ssl) as resp:
-                if resp.status == 200:
-                    logging.debug(f'UniFi OS controller; {asset}')
-                    return True
-                if resp.status == 302:
-                    logging.debug(f'UniFi Standard controller; {asset}')
-                    return False
-    except Exception:
-        pass
-    logging.warning(
-        f'Unable to determine controller type; '
-        f'Using Standard controller; {asset}')
-    return False
-
-
 async def get_credentials(asset: Asset, local_config: dict,
                           config: dict) -> TCredentials:
 
