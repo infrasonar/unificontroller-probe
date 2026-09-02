@@ -1,5 +1,4 @@
 import time
-from typing import Any
 from typing import TypedDict
 
 
